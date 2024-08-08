@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import React from "react";
 
 import { ProductWithRelations } from "@/@types/prisma";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
+import { Dialog, DialogContent } from "@/shared/components/ui/dialog";
+import { cn } from "@/shared/lib/utils";
 
 import { ProductForm } from "../product-form";
 

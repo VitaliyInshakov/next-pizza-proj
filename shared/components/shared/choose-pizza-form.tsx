@@ -1,7 +1,8 @@
 import { Ingredient, ProductItem } from "@prisma/client";
 import React from "react";
 
-import { cn } from "@/lib/utils";
+import { PizzaSize, PizzaType, pizzaTypes } from "@/shared/constants/pizza";
+import { cn } from "@/shared/lib/utils";
 
 import { Button } from "../ui";
 import { GroupVariants } from "./group-variants";

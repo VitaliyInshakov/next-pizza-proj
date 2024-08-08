@@ -4,7 +4,7 @@ import {
 	ProductGroupList,
 	Title,
 	TopBar,
-} from "@/components/shared";
+} from "@/shared/components/shared";
 
 export default function Home() {
 	return (
