@@ -1,10 +1,12 @@
-import { cn } from "@/lib/utils";
-import React from "react";
-import { PizzaImage } from "./pizza-image";
 import { Ingredient, ProductItem } from "@prisma/client";
-import { Title } from "./title";
-import { GroupVariants } from "./group-variants";
+import React from "react";
+
+import { cn } from "@/lib/utils";
+
 import { Button } from "../ui";
+import { GroupVariants } from "./group-variants";
+import { PizzaImage } from "./pizza-image";
+import { Title } from "./title";
 
 interface Props {
 	imageUrl: string;

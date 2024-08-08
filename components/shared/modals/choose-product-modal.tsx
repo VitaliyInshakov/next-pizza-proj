@@ -1,9 +1,12 @@
 "use client";
 
-import React from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
+import React from "react";
+
+import { ProductWithRelations } from "@/@types/prisma";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+
 import { ProductForm } from "../product-form";
 
 interface Props {

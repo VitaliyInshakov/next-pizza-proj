@@ -1,7 +1,15 @@
 {
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaVersion": "latest"
+	},
 	"extends": "next/core-web-vitals",
+	"plugins": ["simple-import-sort", "import"],
 	"rules": {
 		"@next/next/no-img-element": "off",
-		"jsx-a11y/alt-text": "off"
+		"jsx-a11y/alt-text": "off",
+		"simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "error",
+		"import/newline-after-import": "error"
 	}
 }

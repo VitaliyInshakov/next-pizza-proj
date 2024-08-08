@@ -1,8 +1,11 @@
 "use client";
 
-import { ProductWithRelations } from "@/@types/prisma";
 import React from "react";
+
+import { ProductWithRelations } from "@/@types/prisma";
+
 import { ChoosePizzaForm } from "./choose-pizza-form";
+import { ChooseProductForm } from "./choose-product-form";
 
 interface Props {
 	product: ProductWithRelations;
