@@ -12,15 +12,6 @@ export default async function ProductModalPage({
 		where: { id: Number(id) },
 		include: {
 			ingredients: true,
-			category: {
-				include: {
-					products: {
-						include: {
-							productItems: true,
-						},
-					},
-				},
-			},
 			productItems: true,
 		},
 	});

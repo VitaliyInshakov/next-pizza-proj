@@ -3,10 +3,13 @@ import React from "react";
 import { Ingredient, ProductItem } from "@prisma/client";
 
 import { PizzaSize, PizzaType, pizzaTypes } from "@/shared/constants/pizza";
+import { usePizzaOptions } from "@/shared/hooks";
+import { getPizzaDetails } from "@/shared/lib";
 import { cn } from "@/shared/lib/utils";
 
 import { Button } from "../ui";
 import { GroupVariants } from "./group-variants";
+import { IngredientItem } from "./ingredient-item";
 import { PizzaImage } from "./pizza-image";
 import { Title } from "./title";
 
@@ -29,6 +32,25 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 	onSubmit,
 	className,
 }) => {
+	const {
+		size,
+		type,
+		selectedIngredients,
+		availableSizes,
+		currentItemId,
+		setSize,
+		setType,
+		addIngredient,
+	} = usePizzaOptions(items);
+
+	const { totalPrice, textDetaills } = getPizzaDetails(
+		type,
+		size,
+		items,
+		ingredients,
+		selectedIngredients
+	);
+
 	const handleClickAdd = () => {
 		if (currentItemId) {
 			onSubmit(currentItemId, Array.from(selectedIngredients));
@@ -54,12 +76,28 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 						onClick={(value) => setType(Number(value) as PizzaType)}
 					/>
 				</div>
+
+				<div className="scrollbar mt-5 h-[420px] overflow-auto rounded-md bg-gray-50 p-5">
+					<div className="grid grid-cols-3 gap-3">
+						{ingredients.map((ingredient) => (
+							<IngredientItem
+								key={ingredient.id}
+								name={ingredient.name}
+								price={ingredient.price}
+								imageUrl={ingredient.imageUrl}
+								onClick={() => addIngredient(ingredient.id)}
+								active={selectedIngredients.has(ingredient.id)}
+							/>
+						))}
+					</div>
+				</div>
+
 				<Button
 					loading={loading}
 					onClick={handleClickAdd}
 					className="mt-10 h-[55px] w-full rounded-[18px] px-10 text-base"
 				>
-					Add to cart by {totalPrice} &#8372;
+					Add to cart by {totalPrice} ₴
 				</Button>
 			</div>
 		</div>

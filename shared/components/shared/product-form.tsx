@@ -16,7 +16,7 @@ export const ProductForm: React.FC<Props> = ({
 	product,
 	onSubmit: _onSubmit,
 }) => {
-	const firstItem = product.items[0];
+	const firstItem = product.productItems[0];
 	const isPizzaForm = Boolean(firstItem.pizzaType);
 
 	if (isPizzaForm) {
@@ -25,7 +25,7 @@ export const ProductForm: React.FC<Props> = ({
 				imageUrl={product.imageUrl}
 				name={product.name}
 				ingredients={product.ingredients}
-				items={product.items}
+				items={product.productItems}
 				onSubmit={onSubmit}
 				loading={loading}
 			/>

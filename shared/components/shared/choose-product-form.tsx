@@ -40,7 +40,7 @@ export const ChooseProductForm: React.FC<Props> = ({
 					onClick={() => onSubmit?.()}
 					className="mt-10 h-[55px] w-full rounded-[18px] px-10 text-base"
 				>
-					Add to cart by {price} &#8372;
+					Add to cart by {price} ₴
 				</Button>
 			</div>
 		</div>
