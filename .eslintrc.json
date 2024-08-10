@@ -3,13 +3,23 @@
 		"sourceType": "module",
 		"ecmaVersion": "latest"
 	},
-	"extends": "next/core-web-vitals",
-	"plugins": ["simple-import-sort", "import"],
+	"extends": [
+		"next/core-web-vitals",
+		"plugin:import/recommended",
+		"plugin:import/errors",
+		"plugin:import/warnings",
+		"plugin:prettier/recommended"
+	],
+	"plugins": ["prettier", "import"],
 	"rules": {
 		"@next/next/no-img-element": "off",
 		"jsx-a11y/alt-text": "off",
-		"simple-import-sort/imports": "error",
-		"simple-import-sort/exports": "error",
-		"import/newline-after-import": "error"
+		"prettier/prettier": [
+			"warn",
+			{
+				"endOfLine": "auto"
+			}
+		],
+		"import/no-unresolved": "error"
 	}
 }

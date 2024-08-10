@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-import { Title } from "./title";
+
+import { useFilters, useIngredients, useQueryFilters } from "@/shared/hooks";
+
 import { Input, RangeSlider } from "../ui";
 import { CheckboxFiltersGroup } from "./checkbox-filters-group";
-import { useIngredients, useFilters, useQueryFilters } from "@/shared/hooks";
+import { Title } from "./title";
 
 interface Props {
 	className?: string;
@@ -56,8 +58,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
 			/>
 
 			<div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
-				<p className="font-bold mb-3">Price from & to:</p>
-				<div className="flex gap-3 mb-5">
+				<p className="mb-3 font-bold">Price from & to:</p>
+				<div className="mb-5 flex gap-3">
 					<Input
 						type="number"
 						placeholder="0"
