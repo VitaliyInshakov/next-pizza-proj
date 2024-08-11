@@ -1,8 +1,13 @@
 export { Categories } from "./categories";
+export { CartButton } from "./cart-button";
+export { CartDrawer } from "./cart-drawer";
+export { CartDrawerItem } from "./cart-drawer-item";
 export { CheckboxFiltersGroup } from "./checkbox-filters-group";
 export { ChoosePizzaForm } from "./choose-pizza-form";
 export { ChooseProductForm } from "./choose-product-form";
 export { Container } from "./container";
+export { CountButton } from "./count-button";
+export { CountIconButton } from "./count-icon-button";
 export { FilterCheckbox } from "./filter-checkbox";
 export { Filters } from "./filters";
 export { GroupVariants } from "./group-variants";

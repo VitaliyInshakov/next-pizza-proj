@@ -1,4 +1,6 @@
-import { ArrowRight, ShoppingCart, User } from "lucide-react";
+"use client";
+
+import { User } from "lucide-react";
 import React from "react";
 
 import Image from "next/image";
@@ -7,6 +9,7 @@ import Link from "next/link";
 import { cn } from "@/shared/lib/utils";
 
 import { Button } from "../ui";
+import { CartButton } from "./cart-button";
 import { Container } from "./container";
 import { SearchInput } from "./search-input";
 
@@ -24,7 +27,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 						<div>
 							<h1 className="text-2xl font-black uppercase">Next Pizza</h1>
 							<p className="text-sm leading-3 text-gray-400">
-								it couldn't be tastier
+								it could not be tastier
 							</p>
 						</div>
 					</div>
@@ -40,17 +43,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 						Sign in
 					</Button>
 
-					<div>
-						<Button className="group relative">
-							<b>100 ₴</b>
-							<span className="mx-3 h-full w-[1px] bg-white/30" />
-							<div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
-								<ShoppingCart className="relative h-4 w-4" strokeWidth={2} />
-								<b>3</b>
-							</div>
-							<ArrowRight className="absolute right-5 w-5 -translate-x-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
-						</Button>
-					</div>
+					<CartButton />
 				</div>
 			</Container>
 		</header>

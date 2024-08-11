@@ -2,9 +2,11 @@
 
 import React from "react";
 import { useIntersection } from "react-use";
-import { Title } from "./title";
+
+import { useCategoryStore } from "@/shared/store";
+
 import { ProductCard } from "./product-card";
-import { useCategoryStore } from "@/shared/store/category";
+import { Title } from "./title";
 
 interface Props {
 	title: string;
@@ -33,7 +35,7 @@ export const ProductGroupList: React.FC<Props> = ({
 
 	return (
 		<div className={className} id={title} ref={intersectionRef}>
-			<Title text={title} size="lg" className="font-extrabold mb-5" />
+			<Title text={title} size="lg" className="mb-5 font-extrabold" />
 			<div className="grid grid-cols-3 gap-[50px]">
 				{items.map((item, index) => (
 					<ProductCard
