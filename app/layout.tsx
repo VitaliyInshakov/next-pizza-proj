@@ -1,5 +1,7 @@
 import { Nunito } from "next/font/google";
 
+import { Providers } from "@/shared/components/shared";
+
 import "./globals.css";
 
 const nunito = Nunito({
