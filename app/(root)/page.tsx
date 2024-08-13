@@ -7,8 +7,16 @@ import {
 	Title,
 	TopBar,
 } from "@/shared/components/shared";
+import { findPizzas } from "@/shared/lib";
+import { GetSearchParams } from "@/shared/lib/findPizzas";
 
-export default function Home() {
+export default async function Home({
+	searchParams,
+}: {
+	searchParams: GetSearchParams;
+}) {
+	const categories = await findPizzas(searchParams);
+
 	return (
 		<>
 			<Container className="mt-10">

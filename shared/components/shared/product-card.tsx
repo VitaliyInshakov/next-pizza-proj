@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 import { Button } from "../ui";
+import { CountButton } from "./count-button";
 import { Title } from "./title";
 
 interface Props {
