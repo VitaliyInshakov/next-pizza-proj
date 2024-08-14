@@ -3,16 +3,17 @@ import React from "react";
 
 import Link from "next/link";
 
+import { Ingredient } from "@prisma/client";
+
 import { Button } from "../ui";
-import { CountButton } from "./count-button";
 import { Title } from "./title";
 
 interface Props {
 	id: number;
 	name: string;
 	price: number;
-	count?: number;
-	imageUrl?: string;
+	imageUrl: string;
+	ingredients: Ingredient[];
 	className?: string;
 }
 
@@ -20,7 +21,7 @@ export const ProductCard: React.FC<Props> = ({
 	id,
 	name,
 	price,
-	count,
+	ingredients,
 	imageUrl,
 	className,
 }) => {
@@ -33,8 +34,7 @@ export const ProductCard: React.FC<Props> = ({
 
 				<Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
 				<p className="text-sm text-gray-400">
-					Цыпленок, моцарелла, сыры чеддер и пармезан, сырный соус, томаты, соус
-					альфредо, чеснок
+					{ingredients.map((ingredient) => ingredient.name).join(", ")}
 				</p>
 
 				<div className="mt-4 flex items-center justify-between">
@@ -42,14 +42,10 @@ export const ProductCard: React.FC<Props> = ({
 						from <b>{price} ₴</b>
 					</span>
 
-					{count ? (
-						<CountButton value={count} size="lg" />
-					) : (
-						<Button variant="secondary">
-							<Plus className="mr-1 h-4 w-4" />
-							Add
-						</Button>
-					)}
+					<Button variant="secondary">
+						<Plus className="mr-1 h-4 w-4" />
+						Add
+					</Button>
 				</div>
 			</Link>
 		</div>
