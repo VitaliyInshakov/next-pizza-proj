@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import {
 	CheckoutAddressForm,
@@ -35,6 +36,18 @@ export default function CheckoutPage() {
 		},
 	});
 
+	const onSubmit = async (data: CheckoutFormValues) => {
+		try {
+			setSubmitting(true);
+		} catch (error) {
+			console.log(error);
+			setSubmitting(false);
+			toast.error("Failed to create order", {
+				icon: "❌",
+			});
+		}
+	};
+
 	const onClickCountButton = (
 		id: number,
 		quantity: number,
@@ -51,30 +64,34 @@ export default function CheckoutPage() {
 				className="mb-8 text-[36px] font-extrabold"
 			/>
 
-			<div className="flex gap-10">
-				<div className="mb-20 flex flex-1 flex-col gap-10">
-					<CheckoutCart
-						onClickCountButton={onClickCountButton}
-						removeCartItem={removeCartItem}
-						items={items}
-						loading={loading}
-					/>
+			<FormProvider {...form}>
+				<form onSubmit={form.handleSubmit(onSubmit)}>
+					<div className="flex gap-10">
+						<div className="mb-20 flex flex-1 flex-col gap-10">
+							<CheckoutCart
+								onClickCountButton={onClickCountButton}
+								removeCartItem={removeCartItem}
+								items={items}
+								loading={loading}
+							/>
 
-					<CheckoutPersonalForm
-						className={loading ? "pointer-events-none opacity-40" : ""}
-					/>
-					<CheckoutAddressForm
-						className={loading ? "pointer-events-none opacity-40" : ""}
-					/>
-				</div>
+							<CheckoutPersonalForm
+								className={loading ? "pointer-events-none opacity-40" : ""}
+							/>
+							<CheckoutAddressForm
+								className={loading ? "pointer-events-none opacity-40" : ""}
+							/>
+						</div>
 
-				<div className="w-[450px]">
-					<CheckoutSidebar
-						totalAmount={totalAmount}
-						loading={loading || submitting}
-					/>
-				</div>
-			</div>
+						<div className="w-[450px]">
+							<CheckoutSidebar
+								totalAmount={totalAmount}
+								loading={loading || submitting}
+							/>
+						</div>
+					</div>
+				</form>
+			</FormProvider>
 		</Container>
 	);
 }

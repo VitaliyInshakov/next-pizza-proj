@@ -3,7 +3,7 @@
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { AdressInput } from "../address-input";
+import { AddressInput } from "../address-input";
 import { ErrorText } from "../error-text";
 import { FormTextarea } from "../form";
 import { WhiteBlock } from "../white-block";
@@ -23,7 +23,7 @@ export const CheckoutAddressForm: React.FC<Props> = ({ className }) => {
 					name="address"
 					render={({ field, fieldState }) => (
 						<>
-							<AdressInput onChange={field.onChange} />
+							<AddressInput onChange={field.onChange} />
 							{fieldState.error?.message && (
 								<ErrorText text={fieldState.error.message} />
 							)}
@@ -34,7 +34,7 @@ export const CheckoutAddressForm: React.FC<Props> = ({ className }) => {
 				<FormTextarea
 					name="comment"
 					className="text-base"
-					placeholder="Комментарий к заказу"
+					placeholder="Comment"
 					rows={5}
 				/>
 			</div>

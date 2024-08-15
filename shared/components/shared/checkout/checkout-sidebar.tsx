@@ -32,7 +32,7 @@ export const CheckoutSidebar: React.FC<Props> = ({
 					<Skeleton className="h-11 w-48" />
 				) : (
 					<span className="h-11 text-[34px] font-extrabold">
-						{totalPrice} ₽
+						{totalPrice} ₴
 					</span>
 				)}
 			</div>
@@ -64,7 +64,7 @@ export const CheckoutSidebar: React.FC<Props> = ({
 					loading ? (
 						<Skeleton className="h-6 w-16 rounded-[6px]" />
 					) : (
-						`${vatPrice} ₽`
+						`${vatPrice} ₴`
 					)
 				}
 			/>
@@ -79,7 +79,7 @@ export const CheckoutSidebar: React.FC<Props> = ({
 					loading ? (
 						<Skeleton className="h-6 w-16 rounded-[6px]" />
 					) : (
-						`${DELIVERY_PRICE} ₽`
+						`${DELIVERY_PRICE} ₴`
 					)
 				}
 			/>
