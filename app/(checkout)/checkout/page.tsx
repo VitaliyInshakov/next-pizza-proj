@@ -4,6 +4,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
+import { createOrder } from "@/app/actions";
 import {
 	CheckoutAddressForm,
 	CheckoutCart,
@@ -39,6 +40,14 @@ export default function CheckoutPage() {
 	const onSubmit = async (data: CheckoutFormValues) => {
 		try {
 			setSubmitting(true);
+			const url = await createOrder(data);
+			toast.error("Order successfully placed! 📝 Proceeding to payment... ", {
+				icon: "✅",
+			});
+
+			if (url) {
+				location.href = url;
+			}
 		} catch (error) {
 			console.log(error);
 			setSubmitting(false);
