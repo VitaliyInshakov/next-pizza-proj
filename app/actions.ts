@@ -5,7 +5,9 @@ import { cookies } from "next/headers";
 import { OrderStatus } from "@prisma/client";
 
 import { prisma } from "@/prisma/prisma-client";
+import { PayOrderTemplate } from "@/shared/components/shared/email-templates";
 import { CheckoutFormValues } from "@/shared/constants/checkout-form-schema";
+import { createPayment, sendEmail } from "@/shared/lib";
 
 export async function createOrder(data: CheckoutFormValues) {
 	try {
@@ -14,6 +16,33 @@ export async function createOrder(data: CheckoutFormValues) {
 
 		if (!cartToken) {
 			throw new Error("Cart token not found");
+		}
+
+		const userCart = await prisma.cart.findFirst({
+			include: {
+				user: true,
+				items: {
+					include: {
+						ingredients: true,
+						productItem: {
+							include: {
+								product: true,
+							},
+						},
+					},
+				},
+			},
+			where: {
+				token: cartToken,
+			},
+		});
+
+		if (!userCart) {
+			throw new Error("Cart not found");
+		}
+
+		if (userCart?.totalAmount === 0) {
+			throw new Error("Cart is empty");
 		}
 
 		const order = await prisma.order.create({
@@ -29,6 +58,54 @@ export async function createOrder(data: CheckoutFormValues) {
 				items: JSON.stringify(userCart.items),
 			},
 		});
+
+		await prisma.cart.update({
+			where: {
+				id: userCart.id,
+			},
+			data: {
+				totalAmount: 0,
+			},
+		});
+
+		await prisma.cartItem.deleteMany({
+			where: {
+				cartId: userCart.id,
+			},
+		});
+
+		const paymentData = await createPayment({
+			amount: order.totalAmount,
+			orderId: order.id,
+			description: "Payment for order #" + order.id,
+		});
+
+		if (!paymentData?.url) {
+			throw new Error("Payment data not found");
+		}
+
+		await prisma.order.update({
+			where: {
+				id: order.id,
+			},
+			data: {
+				paymentId: paymentData.id,
+			},
+		});
+
+		const paymentUrl = paymentData.url;
+
+		await sendEmail(
+			data.email,
+			"Next Pizza / Pay for your order #" + order.id,
+			PayOrderTemplate({
+				orderId: order.id,
+				totalAmount: order.totalAmount,
+				paymentUrl,
+			})
+		);
+
+		return paymentUrl;
 	} catch (error) {
 		console.error("[CreateOrder] Server error", error);
 	}

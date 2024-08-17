@@ -15,6 +15,10 @@ export const AddressInput: React.FC<Props> = ({ onChange }) => {
 		onPlaceSelected: (place) => {
 			onChange?.(place.formatted_address);
 		},
+		options: {
+			types: ["geocode", "establishment"],
+			componentRestrictions: { country: "ua" },
+		},
 	});
 
 	return <Input ref={ref} className="text-md h-12" />;
