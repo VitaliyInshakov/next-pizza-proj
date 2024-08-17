@@ -29,3 +29,4 @@ export { RequiredSymbol } from "./required-symbol";
 export { ErrorText } from "./error-text";
 export { ClearButton } from "./clear-button";
 export { AddressInput } from "./address-input";
+export { ProfileButton } from "./profile-button";
