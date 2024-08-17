@@ -2,9 +2,11 @@
 
 import { User } from "lucide-react";
 import React from "react";
+import toast from "react-hot-toast";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { cn } from "@/shared/lib/utils";
 
@@ -24,6 +26,30 @@ export const Header: React.FC<Props> = ({
 	hasCart = true,
 	className,
 }) => {
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
+	React.useEffect(() => {
+		let toastMessage = "";
+
+		if (searchParams.has("paid")) {
+			toastMessage = "Order successfully paid! Information sent to email.";
+		}
+
+		if (searchParams.has("verified")) {
+			toastMessage = "Email successfully confirmed!";
+		}
+
+		if (toastMessage) {
+			setTimeout(() => {
+				router.replace("/");
+				toast.success(toastMessage, {
+					duration: 3000,
+				});
+			}, 1000);
+		}
+	}, []);
+
 	return (
 		<header className={cn("border-b", className)}>
 			<Container className="flex items-center justify-between py-8">
