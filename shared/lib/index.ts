@@ -9,4 +9,3 @@ export { findOrCreateCart } from "./findOrCreateCart";
 export { findPizzas } from "./findPizzas";
 export { sendEmail } from "./send-email";
 export { createPayment } from "./creat-payment";
-export { getUserSession } from "./getUserSession";

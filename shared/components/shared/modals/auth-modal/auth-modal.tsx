@@ -7,6 +7,7 @@ import { Button } from "@/shared/components/ui";
 import { Dialog, DialogContent } from "@/shared/components/ui/dialog";
 
 import { LoginForm } from "./forms/login-form";
+import { RegisterForm } from "./forms/register-form";
 
 interface Props {
 	open: boolean;
