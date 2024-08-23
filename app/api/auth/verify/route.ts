@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
 		});
 
 		if (!verificationCode) {
-			return NextResponse.json({ error: "Неверный код" }, { status: 400 });
+			return NextResponse.json({ error: "Invalid code" }, { status: 400 });
 		}
 
 		await prisma.user.update({
